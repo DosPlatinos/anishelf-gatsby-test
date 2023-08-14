@@ -1,3 +1,7 @@
+/**
+ * Anilist wants their GraphQL queries as STRINGS
+ */
+
 export const GET_ANIME_BY_ID: string = `
   query GetAnimeById($id: Int) {
     # Define which variables will be used in the query (id)

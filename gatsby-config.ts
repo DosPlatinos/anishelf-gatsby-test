@@ -1,3 +1,6 @@
+import "dotenv/config";
+
+// console.log(process.env);
 import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
