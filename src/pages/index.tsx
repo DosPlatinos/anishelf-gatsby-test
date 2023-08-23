@@ -1,6 +1,8 @@
 import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { GET_ANIME_BY_ID } from "../queries/getAnimeById.query";
+import { useRequestProcessor } from "../server/requestProcessor";
+import { animeById } from "../server/functions/anime-by-id";
 
 const pageStyles = {
   color: "#232129",
@@ -15,7 +17,7 @@ const headingStyles = {
 
 const IndexPage: React.FC<PageProps> = () => {
   const [animeId, setAnimeId] = useState<string>("");
-  const [animeData, setAnimeData] = useState({});
+  const { query } = useRequestProcessor();
 
   // Write useLazyQuery
   // Render result
@@ -29,40 +31,44 @@ const IndexPage: React.FC<PageProps> = () => {
 
     if (animeId === "") return;
 
+    const {
+      data: anime,
+      isLoading,
+      isError,
+    } = query(["anime", animeId], () => animeById(animeId));
+
+    console.log(anime);
+
     // Define the config we'll need for our Api request
-    const url = "https://graphql.anilist.co";
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        query: GET_ANIME_BY_ID,
-        variables: { id: animeId },
-      }),
-    };
+    // const url = "https://graphql.anilist.co";
+    // const options = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     query: GET_ANIME_BY_ID,
+    //     variables: { id: animeId },
+    //   }),
+    // };
 
-    // Make the HTTP Api request
-    fetch(url, options)
-      .then(handleResponse)
-      .then(handleData)
-      .catch(handleError);
+    // // Make the HTTP Api request
+    // fetch(url, options)
+    //   .then(handleResponse)
+    //   .then(handleData)
+    //   .catch(handleError);
 
-    function handleResponse(response: Response) {
-      return response.json().then(function (json) {
-        return response.ok ? json : Promise.reject(json);
-      });
-    }
+    // function handleResponse(response: Response) {
+    //   return response.json().then(function (json) {
+    //     return response.ok ? json : Promise.reject(json);
+    //   });
+    // }
 
-    function handleData(data: object) {
-      setAnimeData(data);
-    }
-
-    function handleError(error: object) {
-      alert("Error, check console");
-      console.error(error);
-    }
+    // function handleError(error: object) {
+    //   alert("Error, check console");
+    //   console.error(error);
+    // }
   };
 
   // useEffect(() => {
