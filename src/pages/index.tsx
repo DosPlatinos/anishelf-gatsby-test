@@ -1,18 +1,7 @@
 import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
-import { Link } from "gatsby";
 import type { HeadFC, PageProps } from "gatsby";
 import { GET_ANIME_BY_ID } from "../queries/getAnimeById.query";
-
-const pageStyles = {
-  color: "#232129",
-  padding: 96,
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-};
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-};
+import Layout from "../components/layout";
 
 const IndexPage: React.FC<PageProps> = () => {
   const [animeId, setAnimeId] = useState<string>("");
@@ -24,53 +13,47 @@ const IndexPage: React.FC<PageProps> = () => {
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setAnimeId(event.target.value);
   };
+};
 
-  const submitForm = (event: SyntheticEvent): void => {
-    event.preventDefault();
+const submitForm = (event: SyntheticEvent): void => {
+  event.preventDefault();
 
-    if (animeId === "") return;
+  if (animeId === "") return;
 
-    // Define the config we'll need for our Api request
-    const url = "https://graphql.anilist.co";
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        query: GET_ANIME_BY_ID,
-        variables: { id: animeId },
-      }),
-    };
-
-    // Make the HTTP Api request
-    fetch(url, options)
-      .then(handleResponse)
-      .then(handleData)
-      .catch(handleError);
-
-    function handleResponse(response: Response) {
-      return response.json().then(function (json) {
-        return response.ok ? json : Promise.reject(json);
-      });
-    }
-
-    function handleData(data: object) {
-      setAnimeData(data);
-    }
-
-    function handleError(error: object) {
-      alert("Error, check console");
-      console.error(error);
-    }
+  // Define the config we'll need for our Api request
+  const url = "https://graphql.anilist.co";
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query: GET_ANIME_BY_ID,
+      variables: { id: animeId, user },
+    }),
   };
 
-  return (
-    <main style={pageStyles}>
-      <Link to="/with-auth">Go do auth stuff</Link>
+  // Make the HTTP Api request
+  fetch(url, options).then(handleResponse).then(handleData).catch(handleError);
 
-      <h1 style={headingStyles}>Anilist GraphQL Query Test</h1>
+  function handleResponse(response: Response) {
+    return response.json().then(function (json) {
+      return response.ok ? json : Promise.reject(json);
+    });
+  }
+
+  function handleData(data: object) {
+    setAnimeData(data);
+  }
+
+  function handleError(error: object) {
+    alert("Error, check console");
+    console.error(error);
+  }
+  return (
+    <Layout>
+      <h1>Anilist GraphQL Query Test</h1>
 
       <form onSubmit={submitForm}>
         <label htmlFor="anime-id">Anime ID</label>
@@ -85,9 +68,13 @@ const IndexPage: React.FC<PageProps> = () => {
       </form>
 
       {animeData && <pre>{JSON.stringify(animeData, null, 2)}</pre>}
-    </main>
+    </Layout>
   );
 };
+
+// useEffect(() => {
+//   console.log({ animeId });
+// }, [animeId]);
 
 export default IndexPage;
 
