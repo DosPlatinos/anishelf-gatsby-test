@@ -1,7 +1,17 @@
 import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import type { HeadFC, PageProps } from "gatsby";
 import { GET_ANIME_BY_ID } from "../queries/getAnimeById.query";
-import Layout from "../components/layout";
+
+const pageStyles = {
+  color: "#232129",
+  padding: 96,
+  fontFamily: "-apple-system, Roboto, sans-serif, serif",
+};
+const headingStyles = {
+  marginTop: 0,
+  marginBottom: 64,
+  maxWidth: 320,
+};
 
 const IndexPage: React.FC<PageProps> = () => {
   const [animeId, setAnimeId] = useState<string>("");
@@ -51,9 +61,10 @@ const submitForm = (event: SyntheticEvent): void => {
     alert("Error, check console");
     console.error(error);
   }
+
   return (
-    <Layout>
-      <h1>Anilist GraphQL Query Test</h1>
+    <main style={pageStyles}>
+      <h1 style={headingStyles}>Anilist GraphQL Query Test</h1>
 
       <form onSubmit={submitForm}>
         <label htmlFor="anime-id">Anime ID</label>
@@ -68,7 +79,7 @@ const submitForm = (event: SyntheticEvent): void => {
       </form>
 
       {animeData && <pre>{JSON.stringify(animeData, null, 2)}</pre>}
-    </Layout>
+    </main>
   );
 };
 
