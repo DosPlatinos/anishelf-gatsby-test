@@ -1,13 +1,17 @@
+:root {
+  background-color: #16191b;
+}
+
 .site-theme-dark {
-  --color-background: 28,31,34;
+  --color-background: 28, 31, 34;
   --color-foreground: 25, 27, 30;
-  --color-blue: 255,105,97;
+  --color-blue: 255, 105, 97;
   --color-foreground-blue: 25, 27, 30;
-  --color-background-100: 20,22,24;
-  --color-background-200: 17,19,20;
-  --color-gray-100: 20,22,24;
-  --color-foreground-grey: 20,22,24;
-  --color-foreground-grey-dark: 17,19,20;
+  --color-background-100: 20, 22, 24;
+  --color-background-200: 17, 19, 20;
+  --color-gray-100: 20, 22, 24;
+  --color-foreground-grey: 20, 22, 24;
+  --color-foreground-grey-dark: 17, 19, 20;
 }
 
 .banner[data-v-b5c85c0a] {
@@ -16,21 +20,21 @@
 
 .behind-accent[data-v-16d5094e] {
   background: #ff8e88;
-  height: .9px;
+  height: 0.9px;
 }
 
 @media (max-width: 760px) {
   .banner[data-v-b5c85c0a] {
-      height: 135px;
+    height: 135px;
   }
 }
 
 .small .cover .image-text[data-v-4b71d7c6] {
-  background: linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,.1));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.1));
 }
 
 .footer[data-v-6f9ee47f] {
-  background: rgb(20,22,24);
+  background: rgb(20, 22, 24);
 }
 
 .site-theme-dark .nav-unscoped {
@@ -38,7 +42,7 @@
 }
 
 .site-theme-dark .nav-unscoped.transparent {
-  background: rgba(22,25,27,.5);
+  background: rgba(22, 25, 27, 0.5);
 }
 
 .site-theme-dark .nav-unscoped.transparent:hover {
@@ -46,7 +50,7 @@
 }
 
 .site-theme-dark .quick-search {
-  background: rgba(17,19,20,.9);
+  background: rgba(17, 19, 20, 0.9);
 }
 
 h2[data-v-6f9ee47f] {
@@ -54,14 +58,14 @@ h2[data-v-6f9ee47f] {
 }
 
 .banner .shadow[data-v-b5c85c0a] {
-  background: rgba(20,22,24,.7);
+  background: rgba(20, 22, 24, 0.7);
 }
 
 .user-page-unscoped.red .progress .bar {
-  background: linear-gradient(270deg,#ff8e88,#f78c9b);
+  background: linear-gradient(270deg, #ff8e88, #f78c9b);
 }
 
-.feed-type-toggle>div.active[data-v-7b8d25f2] {
+.feed-type-toggle > div.active[data-v-7b8d25f2] {
   color: #ff8e88;
 }
 
@@ -70,7 +74,7 @@ h2[data-v-6f9ee47f] {
 }
 
 .el-message--success {
-  background-color: rgba(16,16,16,.85);
+  background-color: rgba(16, 16, 16, 0.85);
   border: 0px solid black;
 }
 
@@ -86,50 +90,46 @@ h1 {
   font-weight: 500;
 }
 
-}
-
-@-moz-document regexp("^https://anilist.co/anime/.*/.*/watch") {
-
-@media screen and (max-width: 760px) {
-  .external-links[data-v-da429fba] {
+@-moz-document regexp("^https://anilist.co/anime/.*/.*/watch")
+{
+  @media screen and (max-width: 760px) {
+    .external-links[data-v-da429fba] {
       display: inline;
+    }
   }
-}
 
-@media (max-width: 1040px) {
-  .watch[data-v-7e52d138] {
-  margin-top: 20px;
+  @media (max-width: 1040px) {
+    .watch[data-v-7e52d138] {
+      margin-top: 20px;
+    }
   }
-}
 
-@media (max-width: 760px) {
-  .data[data-v-c657baee] {
-  display: none;
-  }
-}
-
-.content[data-v-da429fba] {
-  margin-top: 18.5px;
-}
-
-}
-
-@-moz-document regexp("^https://anilist.co/manga/.*/.*/stats") {
-
-@media screen and (max-width: 760px) {
-  .external-links[data-v-da429fba] {
-      display: inline;
-  }
-}
-
-@media screen and (max-width: 760px) {
-  .data[data-v-c657baee] {
+  @media (max-width: 760px) {
+    .data[data-v-c657baee] {
       display: none;
+    }
+  }
+
+  .content[data-v-da429fba] {
+    margin-top: 18.5px;
   }
 }
 
-.content[data-v-da429fba] {
-  margin-top: 18.5px;
-}
+@-moz-document regexp("^https://anilist.co/manga/.*/.*/stats")
+{
+  @media screen and (max-width: 760px) {
+    .external-links[data-v-da429fba] {
+      display: inline;
+    }
+  }
 
+  @media screen and (max-width: 760px) {
+    .data[data-v-c657baee] {
+      display: none;
+    }
+  }
+
+  .content[data-v-da429fba] {
+    margin-top: 18.5px;
+  }
 }

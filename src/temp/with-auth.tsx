@@ -77,9 +77,9 @@ const IndexPage: React.FC<PageProps> = () => {
   const fetchFollowerList = (event: SyntheticEvent): void => {
     event.preventDefault();
 
-  const fetchCurrEpisodeList = (event: ) : void => {
-    event.
-  }
+    // const fetchCurrEpisodeList = (event: ) : void => {
+    //   event.
+    // }
 
     setMessage("Fetching followers");
 
@@ -208,9 +208,7 @@ const IndexPage: React.FC<PageProps> = () => {
 
       {message && <p>{message}</p>}
 
-      {currEpisodeData && (
-        <pre>{JSON.stringify(currEpisodeData, null, 2)}</pre>
-      )}
+      {currEpisodeData && <pre>{JSON.stringify(currEpisodeData, null, 2)}</pre>}
 
       <h2>Implicit Grant</h2>
     </main>
