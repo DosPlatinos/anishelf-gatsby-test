@@ -3,6 +3,7 @@ import { Link } from "gatsby";
 import type { HeadFC, PageProps } from "gatsby";
 import { GET_CURRENT_VIEWER } from "../queries/getCurrentViewer.query";
 import { GET_FOLLOWERS_OF_USER } from "../queries/getFollowersOfUser.query";
+import { GET_FOLLOWERS_CURR_EPISODES } from "../queries/getFollowersCurrEpisodes.query";
 
 const pageStyles = {
   color: "#232129",
@@ -19,6 +20,7 @@ const IndexPage: React.FC<PageProps> = () => {
   const [currentUserId, setCurrUserId] = useState("");
   const [currFollowerData, setCurrFollowerData] = useState({});
   const [viewerData, setViewerData] = useState({});
+  const [currEpisodeData, setCurrEpisodeData] = useState({});
   const [message, setMessage] = useState("");
 
   const fetchViewer = (event: SyntheticEvent): void => {
@@ -38,6 +40,7 @@ const IndexPage: React.FC<PageProps> = () => {
       },
       body: JSON.stringify({
         query: GET_CURRENT_VIEWER,
+        variables: { viewerData: viewerData },
       }),
     };
 
@@ -73,6 +76,10 @@ const IndexPage: React.FC<PageProps> = () => {
 
   const fetchFollowerList = (event: SyntheticEvent): void => {
     event.preventDefault();
+
+  const fetchCurrEpisodeList = (event: ) : void => {
+    event.
+  }
 
     setMessage("Fetching followers");
 
@@ -116,6 +123,40 @@ const IndexPage: React.FC<PageProps> = () => {
       console.error(error);
     }
   };
+  // Define the config we'll need for our Api request
+  const url = "https://graphql.anilist.co";
+  const options = {
+    method: "POST",
+    headers: {
+      // TODO: read token from cookie
+      // Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query: GET_FOLLOWERS_CURR_EPISODES,
+      variables: { currEpisode: currEpisodeData },
+    }),
+  };
+
+  // Make the HTTP Api request
+  fetch(url, options).then(handleResponse).then(handleData).catch(handleError);
+
+  function handleResponse(response: Response) {
+    return response.json().then(function (json) {
+      return response.ok ? json : Promise.reject(json);
+    });
+  }
+
+  function handleData(data: object) {
+    setCurrEpisodeData(data);
+    setMessage("fetched");
+  }
+
+  function handleError(error: object) {
+    alert("Error, check console");
+    console.error(error);
+  }
 
   return (
     <main style={pageStyles}>
@@ -149,6 +190,26 @@ const IndexPage: React.FC<PageProps> = () => {
 
       {currFollowerData && (
         <pre>{JSON.stringify(currFollowerData, null, 2)}</pre>
+      )}
+
+      <hr />
+
+      <form onSubmit={fetchCurrEpisodesList}>
+        <label htmlFor="fetch-curr-episodes">Get current episodes list</label>
+        <input
+          id="fetch-curr-episodes"
+          type="string"
+          name="fetchCurrEpisodes"
+          value={currEpisodeData}
+          onChange={fetchCurrEpisodeList}
+        />
+        <button type="submit">Get Followers of Current Viewer</button>
+      </form>
+
+      {message && <p>{message}</p>}
+
+      {currEpisodeData && (
+        <pre>{JSON.stringify(currEpisodeData, null, 2)}</pre>
       )}
 
       <h2>Implicit Grant</h2>
