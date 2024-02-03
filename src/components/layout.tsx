@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import { Link } from "gatsby";
+import "../styles/layout.css";
 
 export default function Layout({ children }: { children: PropsWithChildren }) {
   return (
@@ -12,4 +13,4 @@ export default function Layout({ children }: { children: PropsWithChildren }) {
       {children}
     </>
   );
-
+}
