@@ -1,6 +1,7 @@
 import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { Link } from "gatsby";
 import type { HeadFC, PageProps } from "gatsby";
+import Layout from "../components/layout";
 import { GET_ANIME_BY_ID } from "../queries/getAnimeById.query";
 
 const pageStyles = {
@@ -68,23 +69,25 @@ const IndexPage: React.FC<PageProps> = () => {
 
   return (
     <main style={pageStyles}>
-      <Link to="/with-auth">Go do auth stuff</Link>
+      <Layout>
+        <Link to="/with-auth">Go do auth stuff</Link>
 
-      <h1 style={headingStyles}>Anilist GraphQL Query Test</h1>
+        <h1 style={headingStyles}>Anilist GraphQL Query Test</h1>
 
-      <form onSubmit={submitForm}>
-        <label htmlFor="anime-id">Anime ID</label>
-        <input
-          id="anime-id"
-          type="text"
-          name="animeId"
-          value={animeId}
-          onChange={onChange}
-        />
-        <button type="submit">Find Anime</button>
-      </form>
+        <form onSubmit={submitForm}>
+          <label htmlFor="anime-id">Anime ID</label>
+          <input
+            id="anime-id"
+            type="text"
+            name="animeId"
+            value={animeId}
+            onChange={onChange}
+          />
+          <button type="submit">Find Anime</button>
+        </form>
 
-      {animeData && <pre>{JSON.stringify(animeData, null, 2)}</pre>}
+        {animeData && <pre>{JSON.stringify(animeData, null, 2)}</pre>}
+      </Layout>
     </main>
   );
 };
