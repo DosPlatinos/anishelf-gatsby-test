@@ -213,9 +213,6 @@ const IndexPage: React.FC<PageProps> = () => {
       )}
 
       <h2>Implicit Grant</h2>
-      <a href="https://anilist.co/api/v2/oauth/authorize?client_id=13852&response_type=token">
-        Login with AniList
-      </a>
     </main>
   );
 };

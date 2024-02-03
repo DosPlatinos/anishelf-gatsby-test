@@ -1,5 +1,6 @@
 import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import type { HeadFC, PageProps } from "gatsby";
+import Layout from "../components/layout";
 import { GET_ANIME_BY_ID } from "../queries/getAnimeById.query";
 
 const pageStyles = {
@@ -64,6 +65,7 @@ const submitForm = (event: SyntheticEvent): void => {
 
   return (
     <main style={pageStyles}>
+
       <h1 style={headingStyles}>Anilist GraphQL Query Test</h1>
 
       <form onSubmit={submitForm}>
