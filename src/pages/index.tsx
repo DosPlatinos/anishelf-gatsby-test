@@ -11,10 +11,6 @@ const IndexPage: React.FC<PageProps> = () => {
   );
 };
 
-// useEffect(() => {
-//   console.log({ animeId });
-// }, [animeId]);
-
 export default IndexPage;
 
 export const Head: HeadFC = () => <title>Home Page</title>;
